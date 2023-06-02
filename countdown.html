@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script type="text/javascript">
+        var minutes = 0;
+        var seconds = 0;
+        var intervalId = null;
+
+        function startTimer() {
+            intervalId = setInterval(updateTimer, 1000);
+        }
+
+        function updateTimer() {
+            seconds -= 1;
+            if (seconds < 0) {
+                minutes -= 1;
+                seconds = 59;
+            }
+            if (minutes < 0) {
+                clearInterval(intervalId);
+                alert("Countdown finished!");
+            }
+            displayTime();
+        }
+
+        function displayTime() {
+            var time = document.getElementById("time");
+            time.innerHTML = ("0" + minutes).slice(-2) + ":" + ("0" + seconds).slice(-2);
+        }
+
+        function addTime() {
+            minutes += 30;
+            displayTime();
+        }
+    </script>
+</head>
+<body>
+    <h1>Roll20 Countdown Clock</h1>
+    <p>Time Remaining: <span id="time">00:00</span></p>
+    <button onclick="addTime()">Add 30 Minutes</button>
+    <button onclick="startTimer()">Start</button>
+</body>
+</html>
